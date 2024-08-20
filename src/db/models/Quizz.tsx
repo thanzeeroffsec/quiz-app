@@ -1,33 +1,50 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 
-interface IQuestion extends Document {
-  question: string;
-  options: string[];
-  category: string;
-  answer: string;
+interface IQuizz extends Document {
+  userId: mongoose.Types.ObjectId; // Reference to User model
+  questions: mongoose.Types.ObjectId[]; // Array of references to Question model
+  correct: number;
+  wrong: number;
+  active: boolean;
+  completed: boolean;
 }
+const QuizSchema = new Schema<IQuizz>(
+  {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "Student",
+      required: true,
+    },
+    questions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Question",
+        required: true,
+      },
+    ],
+    correct: {
+      type: Number,
+    },
+    wrong: {
+      type: Number,
+    },
+    active: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
+    completed: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const QuestionSchema = new Schema<IQuestion>({
-  question: {
-    type: String,
-    required: true,
-  },
-  options: {
-    type: [String],
-    required: true,
-  },
-  category: {
-    type: String,
-    required: true,
-  },
-  answer: {
-    type: String,
-    required: true,
-  },
-});
+const Quiz: Model<IQuizz> =
+  mongoose.models.Quiz || mongoose.model<IQuizz>("Quiz", QuizSchema);
 
-const Question: Model<IQuestion> =
-  mongoose.models.Question ||
-  mongoose.model<IQuestion>("Question", QuestionSchema);
-
-export default Question;
+export default Quiz;

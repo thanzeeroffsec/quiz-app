@@ -18,8 +18,8 @@ import { FaCheck } from "react-icons/fa6";
 import { Loader2 } from "lucide-react";
 import { useParams } from "next/navigation";
 
-const page = () => {
-  const { quizId } = useParams<{ tag: string; item: string }>();
+const Page = () => {
+  const { quizId } = useParams<{ quizId: string }>();
 
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState<string[]>([""]);
@@ -179,4 +179,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

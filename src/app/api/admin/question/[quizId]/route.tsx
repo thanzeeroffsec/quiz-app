@@ -1,5 +1,5 @@
 import dbConnect from "@/db/config/mongodb";
-import Quiz from "@/db/models/Quizz";
+import Quiz from "@/db/models/Question";
 import { NextResponse } from "next/server";
 
 export async function GET(

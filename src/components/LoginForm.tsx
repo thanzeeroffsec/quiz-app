@@ -2,12 +2,14 @@
 import React, { FormEvent, useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -27,8 +29,7 @@ const LoginForm = () => {
       if (!res.ok) {
         throw new Error(data.message || "Something went wrong");
       }
-
-      window.location.href = "/admin"; // Redirect after successful login
+      router.push("/admin");
     } catch (error: any) {
       setError(error.message);
     } finally {

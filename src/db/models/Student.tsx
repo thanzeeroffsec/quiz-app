@@ -4,6 +4,8 @@ interface IStudent extends Document {
   name: string;
   category: string;
   point: number;
+  inQuiz: boolean;
+  quizId: mongoose.Types.ObjectId;
 }
 
 const StudentSchema = new Schema<IStudent>({
@@ -18,6 +20,14 @@ const StudentSchema = new Schema<IStudent>({
   point: {
     type: Number,
     default: 0,
+  },
+  inQuiz: {
+    type: Boolean,
+    default: false,
+  },
+  quizId: {
+    type: Schema.Types.ObjectId,
+    ref: "Quiz",
   },
 });
 

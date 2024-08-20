@@ -1,5 +1,5 @@
 import dbConnect from "@/db/config/mongodb";
-import Question from "@/db/models/Quizz";
+import Question from "@/db/models/Question";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(Req: NextRequest) {

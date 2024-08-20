@@ -5,14 +5,18 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { FaRegTrashCan } from "react-icons/fa6";
-import EditStudent from "@/components/admin/students/EditStudent";
+
 import DeleteStudent from "@/components/admin/students/DeleteStudent";
-import { Student } from "@/utils/fetchStudents";
+import { Student } from "@/lib/fetchStudents";
+import EditStudent from "./EditStudent";
+import { BsPencil } from "react-icons/bs";
 
 interface TableDataProps {
   students: Student[];
   currentPage: number;
   itemsPerPage: number;
+  loading: boolean; // Added loading prop
+
   refreshStudents: () => void;
 }
 
@@ -60,7 +64,7 @@ const TableData: React.FC<TableDataProps> = ({
             <TableCell className="text-right flex gap-1 justify-end py-[2px]">
               <span onClick={() => setSingleStudent(student)}>
                 <EditStudent
-                  student={singleStudent}
+                  student={singleStudent!}
                   onClose={() => setSingleStudent(null)}
                   refreshStudents={refreshStudents}
                 />
